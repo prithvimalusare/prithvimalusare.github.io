@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Funky Factory - Coming Soon</title>
+  <title>funkyfactory - Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     /* Reset and base */
@@ -13,13 +13,14 @@
       box-sizing: border-box;
     }
 
-    body, html {
+    html, body {
       height: 100%;
       font-family: 'Poppins', sans-serif;
-      color: #ffffff;
-      background: linear-gradient(270deg, #ff4d4d, #1e90ff, #ffcd3c, #8e44ad);
-      background-size: 800% 800%;
-      animation: gradientShift 20s ease infinite;
+      background: linear-gradient(-45deg, #ff4d4d, #1e90ff, #ffcd3c, #8e44ad, #00c9a7, #fd6e6a);
+      background-size: 1000% 1000%;
+      animation: gradientShift 10s ease infinite;
+      color: #fff;
+      overflow: hidden;
     }
 
     @keyframes gradientShift {
@@ -29,66 +30,103 @@
     }
 
     .container {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 40px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.2rem;
       font-weight: 700;
-      margin-bottom: 0.5em;
-      letter-spacing: 1.5px;
+      margin-bottom: 0.4em;
+      letter-spacing: 1px;
+      text-transform: lowercase;
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: slideFadeIn 1.2s ease-out forwards;
     }
 
     p {
       font-size: 1.2rem;
-      font-weight: 400;
       margin-bottom: 2em;
       line-height: 1.6;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out forwards;
+      animation-delay: 0.6s;
     }
 
     .countdown {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      justify-content: center;
-      align-items: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      animation: zoomInFade 1s ease forwards;
+      animation-delay: 1.2s;
     }
 
     .countdown div {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 15px 10px;
-      backdrop-filter: blur(4px);
-      transition: transform 0.3s ease;
-    }
-
-    .countdown div:hover {
-      transform: translateY(-3px);
+      padding: 10px 5px;
     }
 
     .countdown span {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 600;
       display: block;
     }
 
     .countdown label {
       font-size: 0.85rem;
-      color: #f1f1f1;
       text-transform: uppercase;
       letter-spacing: 1px;
+      color: #eee;
+    }
+
+    /* Animations */
+    @keyframes slideFadeIn {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes zoomInFade {
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
       }
 
       p {
@@ -97,23 +135,20 @@
 
       .countdown {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-      .countdown div {
-        padding: 12px 8px;
+        gap: 15px;
+        padding: 20px 15px;
       }
 
       .countdown span {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Funky Factory</h1>
-    <p>We're brewing something bold, bright & brilliant. <br> Launching soon.</p>
+    <h1>funkyfactory</h1>
+    <p>We’re brewing something vibrant, fresh, and funky.<br>Stay tuned.</p>
 
     <div class="countdown">
       <div>
@@ -158,7 +193,7 @@
       document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
 
       if (gap < 0) {
-        document.querySelector(".countdown").innerHTML = "<p style='font-size: 1.5rem;'>We have launched! 🚀</p>";
+        document.querySelector(".countdown").innerHTML = "<p style='font-size: 1.5rem;'>We’ve launched! 🎉</p>";
       }
     };
 

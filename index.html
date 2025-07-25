@@ -4,75 +4,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Funky Factory - Coming Soon</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* Reset and base */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
+    body, html {
+      height: 100%;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ff4d4d, #1e90ff);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      text-align: center;
+      color: #ffffff;
+      background: linear-gradient(270deg, #ff4d4d, #1e90ff, #ffcd3c, #8e44ad);
+      background-size: 800% 800%;
+      animation: gradientShift 20s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .container {
-      max-width: 600px;
-      padding: 20px;
-      animation: fadeIn 1s ease-in-out;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
     }
 
     h1 {
-      font-family: 'Orbitron', sans-serif;
       font-size: 3rem;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.5em;
+      letter-spacing: 1.5px;
     }
 
     p {
       font-size: 1.2rem;
-      margin-bottom: 30px;
+      font-weight: 400;
+      margin-bottom: 2em;
+      line-height: 1.6;
     }
 
     .countdown {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
       justify-content: center;
-      gap: 20px;
+      align-items: center;
     }
 
     .countdown div {
-      background: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       padding: 15px 10px;
-      border-radius: 10px;
-      min-width: 60px;
+      backdrop-filter: blur(4px);
+      transition: transform 0.3s ease;
     }
 
-    .countdown div span {
+    .countdown div:hover {
+      transform: translateY(-3px);
+    }
+
+    .countdown span {
+      font-size: 1.8rem;
+      font-weight: 600;
       display: block;
-      font-size: 1.5rem;
-      font-weight: bold;
     }
 
-    .countdown div label {
-      font-size: 0.75rem;
-      color: #eee;
+    .countdown label {
+      font-size: 0.85rem;
+      color: #f1f1f1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       h1 {
         font-size: 2.2rem;
       }
@@ -82,15 +96,16 @@
       }
 
       .countdown {
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
 
       .countdown div {
-        min-width: 50px;
+        padding: 12px 8px;
       }
 
-      .countdown div span {
-        font-size: 1.2rem;
+      .countdown span {
+        font-size: 1.4rem;
       }
     }
   </style>
@@ -98,7 +113,7 @@
 <body>
   <div class="container">
     <h1>Funky Factory</h1>
-    <p>We're cookin' up something funky! Launching soon...</p>
+    <p>We're brewing something bold, bright & brilliant. <br> Launching soon.</p>
 
     <div class="countdown">
       <div>
@@ -121,30 +136,34 @@
   </div>
 
   <script>
-    // Set your launch date here
     const launchDate = new Date("2025-09-01T00:00:00").getTime();
 
-    const countdown = () => {
+    const updateCountdown = () => {
       const now = new Date().getTime();
-      const distance = launchDate - now;
+      const gap = launchDate - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
+      const days = Math.floor(gap / day);
+      const hours = Math.floor((gap % day) / hour);
+      const minutes = Math.floor((gap % hour) / minute);
+      const seconds = Math.floor((gap % minute) / second);
 
-      if (distance < 0) {
-        document.querySelector(".countdown").innerHTML = "<p>We have launched! 🚀</p>";
+      document.getElementById("days").textContent = String(days).padStart(2, '0');
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+
+      if (gap < 0) {
+        document.querySelector(".countdown").innerHTML = "<p style='font-size: 1.5rem;'>We have launched! 🚀</p>";
       }
     };
 
-    countdown();
-    setInterval(countdown, 1000);
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>

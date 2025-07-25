@@ -1,7 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Funky Factory - Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #1e90ff);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .countdown div {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px 10px;
+      border-radius: 10px;
+      min-width: 60px;
+    }
+
+    .countdown div span {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .countdown div label {
+      font-size: 0.75rem;
+      color: #eee;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .countdown {
+        gap: 10px;
+      }
+
+      .countdown div {
+        min-width: 50px;
+      }
+
+      .countdown div span {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <div class="container">
+    <h1>Funky Factory</h1>
+    <p>We're cookin' up something funky! Launching soon...</p>
+
+    <div class="countdown">
+      <div>
+        <span id="days">00</span>
+        <label>Days</label>
+      </div>
+      <div>
+        <span id="hours">00</span>
+        <label>Hours</label>
+      </div>
+      <div>
+        <span id="minutes">00</span>
+        <label>Minutes</label>
+      </div>
+      <div>
+        <span id="seconds">00</span>
+        <label>Seconds</label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Set your launch date here
+    const launchDate = new Date("2025-09-01T00:00:00").getTime();
+
+    const countdown = () => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      if (distance < 0) {
+        document.querySelector(".countdown").innerHTML = "<p>We have launched! 🚀</p>";
+      }
+    };
+
+    countdown();
+    setInterval(countdown, 1000);
+  </script>
 </body>
 </html>

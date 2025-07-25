@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>funkyfactory - Coming Soon</title>
+  <title>funkyfactory.in - Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset and base */
+    :root {
+      --bg-gradient: linear-gradient(270deg, #ff80b5, #8ec5fc, #fcd34d, #c084fc, #34d399, #fb923c);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -16,112 +19,96 @@
     html, body {
       height: 100%;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #ff4d4d, #1e90ff, #ffcd3c, #8e44ad, #00c9a7, #fd6e6a);
-      background-size: 1000% 1000%;
-      animation: gradientShift 10s ease infinite;
+      background: var(--bg-gradient);
+      background-size: 2000% 2000%;
+      animation: bgFlow 12s ease infinite;
       color: #fff;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
     }
 
-    @keyframes gradientShift {
+    @keyframes bgFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
     .container {
-      max-width: 720px;
-      margin: 0 auto;
+      max-width: 700px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
       padding: 40px 20px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      position: relative;
-      z-index: 1;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     }
 
     h1 {
-      font-size: 3.2rem;
+      font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 0.4em;
-      letter-spacing: 1px;
       text-transform: lowercase;
-      opacity: 0;
-      transform: translateY(-30px);
-      animation: slideFadeIn 1.2s ease-out forwards;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      letter-spacing: 1px;
+      animation: slideIn 1.2s ease-out forwards;
     }
 
-    p {
+    .typing {
       font-size: 1.2rem;
-      margin-bottom: 2em;
-      line-height: 1.6;
-      opacity: 0;
-      animation: fadeInUp 1s ease-out forwards;
-      animation-delay: 0.6s;
+      min-height: 60px;
+      font-weight: 400;
+      color: #fdfdfd;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid rgba(255, 255, 255, 0.75);
+      width: 0;
+      animation: typing 3s steps(40, end) forwards, blink 0.7s infinite;
+      margin: 0 auto 2em;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: rgba(255,255,255,0.8); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .countdown {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 30px 20px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      animation: zoomInFade 1s ease forwards;
-      animation-delay: 1.2s;
+      gap: 15px;
+      margin-top: 1.5em;
     }
 
     .countdown div {
-      padding: 10px 5px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 15px 5px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
 
     .countdown span {
-      font-size: 2rem;
-      font-weight: 600;
       display: block;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ffffff;
     }
 
     .countdown label {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #eee;
-    }
-
-    /* Animations */
-    @keyframes slideFadeIn {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes zoomInFade {
-      from {
-        transform: scale(0.95);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+      color: #f1f1f1;
+      margin-top: 4px;
     }
 
     @media (max-width: 600px) {
@@ -129,26 +116,25 @@
         font-size: 2.4rem;
       }
 
-      p {
+      .typing {
         font-size: 1rem;
       }
 
       .countdown {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 20px 15px;
+        gap: 10px;
       }
 
       .countdown span {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>funkyfactory</h1>
-    <p>We’re brewing something vibrant, fresh, and funky.<br>Stay tuned.</p>
+    <h1>funkyfactory.in</h1>
+    <div class="typing">bringing back the color, the chaos, and the cool — soon.</div>
 
     <div class="countdown">
       <div>
@@ -193,7 +179,7 @@
       document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
 
       if (gap < 0) {
-        document.querySelector(".countdown").innerHTML = "<p style='font-size: 1.5rem;'>We’ve launched! 🎉</p>";
+        document.querySelector(".countdown").innerHTML = "<p style='font-size: 1.5rem;'>We’ve launched! 🚀</p>";
       }
     };
 
